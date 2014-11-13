@@ -7,6 +7,12 @@ from matplotlib import pyplot as plt
 from matplotlib import animation
 import random
 
+def initFigure():
+    figure=plt.figure()
+    axes=plt.axes(xlim=(-500,1500), ylim=(-500,1500))
+    scatter=axes.scatter(boids[0],boids[1])
+    return figure, scatter
+
 def flyTowardsMiddle(posTargetBird, posOtherBird):
 	return (posOtherBird-posTargetBird)*0.01/numberOfBoids
 
@@ -51,9 +57,7 @@ def update_boids(boids):
 		yPos[i]=yPos[i]+yVel[i]
 
 
-figure=plt.figure()
-axes=plt.axes(xlim=(-500,1500), ylim=(-500,1500))
-scatter=axes.scatter(boids[0],boids[1])
+figure,scatter = initFigure()
 
 def animate(frame):
    update_boids(boids)
