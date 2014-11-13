@@ -10,6 +10,9 @@ import random
 def flyTowardsMiddle(posTargetBird, posOtherBird):
 	return (posOtherBird-posTargetBird)*0.01/numberOfBoids
 
+def flyAwayFromNearby(posTargetBird, posOtherBird):
+	return posTargetBird-posOtherBird
+
 # Deliberately terrible code for teaching purposes
 numberOfBoids = 50
 
@@ -29,8 +32,8 @@ def update_boids(boids):
 			# Fly away from nearby 
 			nearOtherBird = (xPos[j]-xPos[i])**2 + (yPos[j]-yPos[i])**2 < 100
 			if nearOtherBird == True:
-				xVel[i]=xVel[i]+(xPos[i]-xPos[j])
-				yVel[i]=yVel[i]+(yPos[i]-yPos[j])
+				xVel[i]+=flyAwayFromNearby(xPos[i],xPos[j])
+				yVel[i]+=flyAwayFromNearby(yPos[i],yPos[j])
 			# Try to match speed with nearby boids
 			quiteNearOtherBird = (xPos[j]-xPos[i])**2 + (yPos[j]-yPos[i])**2 < 10000
 			if quiteNearOtherBird == True:
