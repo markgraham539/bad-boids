@@ -24,19 +24,14 @@ def update_boids(boids):
 			xVel[i]=xVel[i]+(xPos[j]-xPos[i])*0.01/numberOfBoids
 			yVel[i]=yVel[i]+(yPos[j]-yPos[i])*0.01/numberOfBoids
 	# Fly away from nearby boids
-	for i in range(numberOfBoids):
-		for j in range(numberOfBoids):
 			if (xPos[j]-xPos[i])**2 + (yPos[j]-yPos[i])**2 < 100:
 				xVel[i]=xVel[i]+(xPos[i]-xPos[j])
 				yVel[i]=yVel[i]+(yPos[i]-yPos[j])
 	# Try to match speed with nearby boids
-	for i in range(numberOfBoids):
-		for j in range(numberOfBoids):
 			if (xPos[j]-xPos[i])**2 + (yPos[j]-yPos[i])**2 < 10000:
 				xVel[i]=xVel[i]+(xVel[j]-xVel[i])*0.125/numberOfBoids
 				yVel[i]=yVel[i]+(yVel[j]-yVel[i])*0.125/numberOfBoids
 	# Move according to velocities
-	for i in range(numberOfBoids):
 		xPos[i]=xPos[i]+xVel[i]
 		yPos[i]=yPos[i]+yVel[i]
 
