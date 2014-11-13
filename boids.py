@@ -13,6 +13,9 @@ def flyTowardsMiddle(posTargetBird, posOtherBird):
 def flyAwayFromNearby(posTargetBird, posOtherBird):
 	return posTargetBird-posOtherBird
 
+def matchSpeed(velTargetBird, velOtherBird):
+	return (velOtherBird-velTargetBird)*0.125/numberOfBoids
+
 # Deliberately terrible code for teaching purposes
 numberOfBoids = 50
 
@@ -29,16 +32,17 @@ def update_boids(boids):
 		for j in range(numberOfBoids):	
 			xVel[i]+=flyTowardsMiddle(xPos[i],xPos[j])
 			yVel[i]+=flyTowardsMiddle(yPos[i],yPos[j])
-			# Fly away from nearby 
+			
 			nearOtherBird = (xPos[j]-xPos[i])**2 + (yPos[j]-yPos[i])**2 < 100
 			if nearOtherBird == True:
 				xVel[i]+=flyAwayFromNearby(xPos[i],xPos[j])
 				yVel[i]+=flyAwayFromNearby(yPos[i],yPos[j])
-			# Try to match speed with nearby boids
+
 			quiteNearOtherBird = (xPos[j]-xPos[i])**2 + (yPos[j]-yPos[i])**2 < 10000
 			if quiteNearOtherBird == True:
-				xVel[i]=xVel[i]+(xVel[j]-xVel[i])*0.125/numberOfBoids
-				yVel[i]=yVel[i]+(yVel[j]-yVel[i])*0.125/numberOfBoids
+				xVel[i]+=matchSpeed(xVel[i],xVel[j])
+				yVel[i]+=matchSpeed(yVel[i],yVel[j])
+				
 		# Move according to velocities
 		xPos[i]=xPos[i]+xVel[i]
 		yPos[i]=yPos[i]+yVel[i]
