@@ -16,13 +16,16 @@ def flyAwayFromNearby(posTargetBird, posOtherBird):
 def matchSpeed(velTargetBird, velOtherBird):
 	return (velOtherBird-velTargetBird)*0.125/numberOfBoids
 
+def getRandomNumbers(lowerLim, upperLim, number):
+	return [random.uniform(lowerLim,upperLim) for x in range(number)]
+
 # Deliberately terrible code for teaching purposes
 numberOfBoids = 50
 
-boids_x=[random.uniform(-450,50.0) for x in range(numberOfBoids)]
-boids_y=[random.uniform(300.0,600.0) for x in range(numberOfBoids)]
-boid_x_velocities=[random.uniform(0,10.0) for x in range(numberOfBoids)]
-boid_y_velocities=[random.uniform(-20.0,20.0) for x in range(numberOfBoids)]
+boids_x= getRandomNumbers(-450,50.0,numberOfBoids) 
+boids_y=getRandomNumbers(300,600.0,numberOfBoids) 
+boid_x_velocities=getRandomNumbers(0,10,numberOfBoids) 
+boid_y_velocities=getRandomNumbers(-20,20,numberOfBoids) 
 boids=(boids_x,boids_y,boid_x_velocities,boid_y_velocities)
 
 def update_boids(boids):
@@ -42,7 +45,7 @@ def update_boids(boids):
 			if quiteNearOtherBird == True:
 				xVel[i]+=matchSpeed(xVel[i],xVel[j])
 				yVel[i]+=matchSpeed(yVel[i],yVel[j])
-				
+
 		# Move according to velocities
 		xPos[i]=xPos[i]+xVel[i]
 		yPos[i]=yPos[i]+yVel[i]
