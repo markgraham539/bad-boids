@@ -23,16 +23,17 @@ def update_boids(boids):
 	xPos,yPos,xVel,yVel=boids
 	
 	for i in range(numberOfBoids):
-		for j in range(numberOfBoids):
-			# Fly towards the middle		
+		for j in range(numberOfBoids):	
 			xVel[i]+=flyTowardsMiddle(xPos[i],xPos[j])
 			yVel[i]+=flyTowardsMiddle(yPos[i],yPos[j])
-			# Fly away from nearby boids
-			if (xPos[j]-xPos[i])**2 + (yPos[j]-yPos[i])**2 < 100:
+			# Fly away from nearby 
+			nearOtherBird = (xPos[j]-xPos[i])**2 + (yPos[j]-yPos[i])**2 < 100
+			if nearOtherBird == True:
 				xVel[i]=xVel[i]+(xPos[i]-xPos[j])
 				yVel[i]=yVel[i]+(yPos[i]-yPos[j])
 			# Try to match speed with nearby boids
-			if (xPos[j]-xPos[i])**2 + (yPos[j]-yPos[i])**2 < 10000:
+			quiteNearOtherBird = (xPos[j]-xPos[i])**2 + (yPos[j]-yPos[i])**2 < 10000
+			if quiteNearOtherBird == True:
 				xVel[i]=xVel[i]+(xVel[j]-xVel[i])*0.125/numberOfBoids
 				yVel[i]=yVel[i]+(yVel[j]-yVel[i])*0.125/numberOfBoids
 		# Move according to velocities
