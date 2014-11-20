@@ -14,12 +14,13 @@ def test_bad_boids_regression():
 
 
 def test_flyTowardsMiddle():
+	numberOfBoids = 50
 	#Test velocity update is 0 if attraction factor is 0
-	assert boids.flyTowardsMiddle(1,2,0)==0
+	assert boids.flyTowardsMiddle(1,2,0, numberOfBoids)==0
 	#Test velocity update is 0 if boids are in same position
-	assert boids.flyTowardsMiddle(3,3,1)==0
+	assert boids.flyTowardsMiddle(3,3,1, numberOfBoids)==0
 	#Test a fixed example
-	testValue = boids.flyTowardsMiddle(2.0,3.0,1.0)
+	testValue = boids.flyTowardsMiddle(2.0,3.0,1.0, numberOfBoids)
 	knownValue = (1.0/50)
 	assert testValue ==knownValue
 
@@ -32,12 +33,13 @@ def test_flyAwayFromNearby():
 
 
 def test_matchSpeed():
+	numberOfBoids = 50
 	#Test velocity update 0 if speed match factor is 0
-	assert boids.matchSpeed(1,2,0)==0
+	assert boids.matchSpeed(1,2,0, numberOfBoids)==0
 	#Test velocity update is 0 if boids have same speed
-	assert boids.matchSpeed(3,3,1) == 0
+	assert boids.matchSpeed(3,3,1, numberOfBoids) == 0
 	#Test known example
-	testValue = boids.matchSpeed(3,4,2) 
+	testValue = boids.matchSpeed(3,4,2, numberOfBoids) 
 	knownValue = 2/50
 	assert testValue == knownValue
 

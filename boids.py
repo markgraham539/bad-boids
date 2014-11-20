@@ -13,13 +13,13 @@ def initFigure():
     scatter=axes.scatter(boids[0],boids[1])
     return figure, scatter
 
-def flyTowardsMiddle(posTargetBird, posOtherBird,attractionToMiddle):
+def flyTowardsMiddle(posTargetBird, posOtherBird,attractionToMiddle, numberOfBoids):
 	return (posOtherBird-posTargetBird)*attractionToMiddle/numberOfBoids
 
 def flyAwayFromNearby(posTargetBird, posOtherBird):
 	return posTargetBird-posOtherBird
 
-def matchSpeed(velTargetBird, velOtherBird, speedMatchFactor):
+def matchSpeed(velTargetBird, velOtherBird, speedMatchFactor, numberOfBoids):
 	return (velOtherBird-velTargetBird)*speedMatchFactor/numberOfBoids
 
 def getRandomNumbers(lowerLim, upperLim, number):
@@ -41,8 +41,8 @@ def update_boids(boids):
 	
 	for i in range(numberOfBoids):
 		for j in range(numberOfBoids):	
-			xVel[i]+=flyTowardsMiddle(xPos[i],xPos[j],attractionToMiddle)
-			yVel[i]+=flyTowardsMiddle(yPos[i],yPos[j],attractionToMiddle)
+			xVel[i]+=flyTowardsMiddle(xPos[i],xPos[j],attractionToMiddle, numberOfBoids)
+			yVel[i]+=flyTowardsMiddle(yPos[i],yPos[j],attractionToMiddle, numberOfBoids)
 			
 			nearOtherBird = (xPos[j]-xPos[i])**2 + (yPos[j]-yPos[i])**2 < 100
 			if nearOtherBird == True:
@@ -51,8 +51,8 @@ def update_boids(boids):
 
 			quiteNearOtherBird = (xPos[j]-xPos[i])**2 + (yPos[j]-yPos[i])**2 < 10000
 			if quiteNearOtherBird == True:
-				xVel[i]+=matchSpeed(xVel[i],xVel[j],speedMatchFactor)
-				yVel[i]+=matchSpeed(yVel[i],yVel[j],speedMatchFactor)
+				xVel[i]+=matchSpeed(xVel[i],xVel[j],speedMatchFactor, numberOfBoids)
+				yVel[i]+=matchSpeed(yVel[i],yVel[j],speedMatchFactor, numberOfBoids)
 
 		# Move according to velocities
 		xPos[i]=xPos[i]+xVel[i]
