@@ -14,8 +14,6 @@ class Bird(object):
         self.velocity=array([xv,yv])
         self.owner=owner
 
-
-
 class Boid(Bird):
     def __init__(self,x,y,xv,yv,owner):
         super(Boid, self).__init__(x,y,xv,yv,owner)
@@ -49,16 +47,10 @@ class Boid(Bird):
             delta_v-=(separation*self.owner.eagle_fear)/separation.dot(separation)
         return delta_v
 
-
-
-       
-
         
-
 class Eagle(Bird):
     def __init__(self,x,y,xv,yv,owner):
         super(Eagle, self).__init__(x,y,xv,yv,owner)
-
 
     def interactWithBoid(self,other):
         delta_v=array([0.0,0.0])

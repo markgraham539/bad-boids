@@ -12,9 +12,9 @@ boids=Boids(
 boids.initialise_random(50)
 boids.add_eagle(0,0,0,50)
 
-figure=plt.figure()
-axes=plt.axes(xlim=(-2000,1500), ylim=(-500,4000))
-scatter=axes.scatter([b.position[0] for b in boids.boids],[b.position[1] for b in boids.boids])
+figure=plt.figure() #Create a figure
+axes=plt.axes(xlim=(-2000,1500), ylim=(-500,4000)) # Define axes
+scatter=axes.scatter([b.position[0] for b in boids.boids],[b.position[1] for b in boids.boids]) #Plot
 scatter2=axes.scatter([boids.eagles.position[0]],[boids.eagles.position[1]])
 
 
@@ -24,6 +24,7 @@ def animate(frame):
     scatter.set_color([(1,0,0) for b in boids.boids])
     scatter2.set_offsets(boids.eagles.position)
     scatter2.set_color((0,1,0))
+    time_text.set_text(frame)
 
 
 anim = animation.FuncAnimation(figure, animate,
