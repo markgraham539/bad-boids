@@ -110,3 +110,5 @@ class Boids(object):
         self.eagles.position+=self.eagles.velocity
 
 
+
+

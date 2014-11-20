@@ -26,3 +26,14 @@ class Controller(object):
 		from matplotlib import pyplot as plt
 		anim = animation.FuncAnimation(self.viewer.figure, self.animator, frames =50, interval = 50)
 		plt.show()
+
+
+	def stupidAnimate(self,number):
+		self.boids.update()
+		from matplotlib import pyplot as plt
+		figure=plt.figure() #Create a figure
+		axes=plt.axes(xlim=(-2000,1500), ylim=(-500,4000)) # Define axes
+		scatter=axes.scatter([b.position[0] for b in self.boids.boids],[b.position[1] for b in self.boids.boids]) #Plot
+		scatter2=axes.scatter([self.boids.eagles.position[0]],[self.boids.eagles.position[1]])
+		plt.title(number)
+		plt.show()
